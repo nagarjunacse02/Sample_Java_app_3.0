@@ -1,3 +1,11 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: artifactory-registry-secret
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJodHRwczovL2Zpc2RlbW8xLmpmcm9nLmlvL2FydGlmYWN0b3J5LyI6eyJ1c2VybmFtZSI6ImdvcmFudGxhLm5hZ2FyanVuYUBzbGtncm91cC5jb20iLCJwYXNzd29yZCI6IkFkbWluQDEyMyIsImVtYWlsIjoibm9uZSJ9fX0=
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,11 +22,12 @@ spec:
     spec:
       containers:
       - name: myjavaapp
-        image: 600735812827.dkr.ecr.us-west-1.amazonaws.com/javasession2:latest
+        #image: 600735812827.dkr.ecr.us-west-1.amazonaws.com/javasession2:latest
         image: fisdemo1.jfrog.io/fis-demo-dockerhub-docker-local/webapp.7:latest
         ports:
         - containerPort: 8080
-
+      imagePullSecrets:
+      - name: artifactory-registry-secret
 ---
 apiVersion: v1
 kind: Service
