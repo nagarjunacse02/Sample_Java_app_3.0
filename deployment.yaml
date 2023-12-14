@@ -15,6 +15,7 @@ spec:
       containers:
       - name: myjavaapp
         image: 600735812827.dkr.ecr.us-west-1.amazonaws.com/javasession2:latest
+        image: fisdemo1.jfrog.io/fis-demo-dockerhub-docker-local/webapp.7:latest
         ports:
         - containerPort: 8080
 
